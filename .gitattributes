@@ -1,0 +1,12 @@
+# Tell GitHub this is a Python/ML project
+*.py linguist-detectable=true
+*.ipynb linguist-detectable=true
+
+# Don't count these as code
+*.html linguist-documentation
+*.css linguist-documentation  
+*.js linguist-documentation
+
+# Don't count large generated files
+artifacts/*.html linguist-generated=true
+model_comparison.html linguist-generated=true
