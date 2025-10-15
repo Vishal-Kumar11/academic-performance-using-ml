@@ -1,0 +1,48 @@
+# Virtual Environments - DO NOT PUSH!
+venv/
+ML_env/
+env/
+ENV/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.so
+.Python
+
+# Logs
+logs/
+*.log
+
+# Catboost
+catboost_info/
+
+# Jupyter
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+notebook/.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Flask
+instance/
+.webassets-cache
+
+# Model Artifacts (only ignore for git, but keep files locally!)
+# Note: Uncomment if you want to commit model files to GitHub
+# artifacts/*.pkl
+# artifacts/*.csv
+# artifacts/*.html
+# artifacts/*.h5
+# artifacts/*.png

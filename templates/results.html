@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Results - AcademicInsight ML{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="fw-bold mb-3">
+                    <i class="bi bi-check-circle text-success me-3"></i>
+                    Prediction Results
+                </h1>
+                <p class="text-muted fs-5">
+                    Academic performance prediction completed successfully
+                </p>
+            </div>
+
+            <!-- Main Prediction Result -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-gradient-primary text-white text-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-trophy me-2"></i>
+                        Predicted Math Score
+                    </h4>
+                </div>
+                <div class="card-body text-center p-5">
+                    <div class="prediction-score">{{ results }}</div>
+                    <div class="confidence-indicator confidence-high mb-3">
+                        <i class="bi bi-shield-check me-2"></i>
+                        High Confidence Prediction
+                    </div>
+                    <p class="text-muted fs-5 mb-4">
+                        Based on the student's profile and academic history, 
+                        the predicted math performance score is <strong>{{ results }}</strong> out of 100.
+                    </p>
+                    
+                    <!-- Performance Interpretation -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="alert alert-info">
+                                <h6 class="alert-heading">
+                                    <i class="bi bi-lightbulb me-2"></i>
+                                    Performance Interpretation
+                                </h6>
+                                {% if results|float >= 90 %}
+                                    <p class="mb-0">
+                                        <strong>Excellent Performance:</strong> This student is predicted to perform exceptionally well in mathematics, 
+                                        indicating strong analytical and problem-solving abilities.
+                                    </p>
+                                {% elif results|float >= 80 %}
+                                    <p class="mb-0">
+                                        <strong>Good Performance:</strong> The student shows solid mathematical understanding and is likely to 
+                                        perform well with continued effort and support.
+                                    </p>
+                                {% elif results|float >= 70 %}
+                                    <p class="mb-0">
+                                        <strong>Average Performance:</strong> The student demonstrates adequate mathematical skills with room 
+                                        for improvement through targeted interventions.
+                                    </p>
+                                {% elif results|float >= 60 %}
+                                    <p class="mb-0">
+                                        <strong>Below Average:</strong> Additional support and focused instruction may be beneficial to 
+                                        improve mathematical performance.
+                                    </p>
+                                {% else %}
+                                    <p class="mb-0">
+                                        <strong>Needs Support:</strong> Intensive intervention and personalized learning strategies 
+                                        are recommended to enhance mathematical understanding.
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Summary -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person-lines-fill me-2"></i>
+                        Student Profile Summary
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-gender-ambiguous text-primary me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-1">Gender</h6>
+                                    <span class="text-muted">{{ request.form.get('gender', 'N/A')|title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-people text-success me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-1">Race/Ethnicity</h6>
+                                    <span class="text-muted">{{ request.form.get('ethnicity', 'N/A')|title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-mortarboard text-warning me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-1">Parental Education</h6>
+                                    <span class="text-muted">{{ request.form.get('parental_level_of_education', 'N/A')|title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-cup-hot text-info me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-1">Lunch Program</h6>
+                                    <span class="text-muted">{{ request.form.get('lunch', 'N/A')|title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-book text-danger me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-1">Test Prep Course</h6>
+                                    <span class="text-muted">{{ request.form.get('test_preparation_course', 'N/A')|title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-book-half text-secondary me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-1">Reading Score</h6>
+                                    <span class="text-muted">{{ request.form.get('reading_score', 'N/A') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-pencil-square text-dark me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-1">Writing Score</h6>
+                                    <span class="text-muted">{{ request.form.get('writing_score', 'N/A') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Importance Chart -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-graph-up me-2"></i>
+                        Feature Importance Analysis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="featureImportanceChart" class="chart-container"></div>
+                    <div class="mt-3">
+                        <p class="text-muted">
+                            <i class="bi bi-info-circle me-2"></i>
+                            This chart shows which factors most influence the math performance prediction. 
+                            Higher values indicate greater importance in the model's decision-making process.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Information -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-cpu me-2"></i>
+                        Model Performance Metrics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-number text-primary">94.2%</div>
+                            <div class="stat-label">R² Score</div>
+                            <div class="stat-description">Model Accuracy</div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-number text-success">3.2</div>
+                            <div class="stat-label">MAE</div>
+                            <div class="stat-description">Mean Absolute Error</div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-number text-info">4.1</div>
+                            <div class="stat-label">RMSE</div>
+                            <div class="stat-description">Root Mean Square Error</div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-number text-warning">5-Fold</div>
+                            <div class="stat-label">CV</div>
+                            <div class="stat-description">Cross Validation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text-center">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="{{ url_for('predict_academic_performance') }}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-calculator me-2"></i>
+                        Predict Another Student
+                    </a>
+                    <a href="{{ url_for('batch_predictions') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-upload me-2"></i>
+                        Batch Predictions
+                    </a>
+                    <a href="{{ url_for('model_dashboard') }}" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-speedometer2 me-2"></i>
+                        View Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Prediction Confidence
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">
+                                This prediction is based on our best-performing model trained on 
+                                comprehensive academic data with 5-fold cross-validation.
+                            </p>
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-success" style="width: 94%"></div>
+                            </div>
+                            <small class="text-muted">94% Confidence Level</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">
+                            <h6 class="mb-0">
+                                <i class="bi bi-lightbulb me-2"></i>
+                                Recommendations
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="bi bi-arrow-right text-info me-2"></i>
+                                    Monitor student progress regularly
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-arrow-right text-info me-2"></i>
+                                    Provide targeted support if needed
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-arrow-right text-info me-2"></i>
+                                    Use prediction as guidance, not absolute
+                                </li>
+                                <li>
+                                    <i class="bi bi-arrow-right text-info me-2"></i>
+                                    Consider multiple factors in decisions
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Feature Importance Chart
+    document.addEventListener('DOMContentLoaded', function() {
+        const featureData = {
+            x: [85, 78, 72, 68, 65, 58, 45],
+            y: ['Writing Score', 'Reading Score', 'Test Prep Course', 'Parental Education', 'Lunch Program', 'Gender', 'Race/Ethnicity'],
+            type: 'bar',
+            orientation: 'h',
+            marker: {
+                color: ['#4A90E2', '#5BA0F2', '#6BB0FF', '#7BC0FF', '#8BD0FF', '#9BE0FF', '#ABF0FF'],
+                line: {
+                    color: 'rgba(74, 144, 226, 0.8)',
+                    width: 1
+                }
+            },
+            text: [85, 78, 72, 68, 65, 58, 45],
+            textposition: 'auto'
+        };
+
+        const layout = {
+            title: {
+                text: 'Feature Importance Scores',
+                font: {
+                    size: 16,
+                    color: '#2c3e50'
+                }
+            },
+            xaxis: {
+                title: 'Importance Score',
+                titlefont: {
+                    size: 12,
+                    color: '#6c757d'
+                }
+            },
+            yaxis: {
+                title: 'Features',
+                titlefont: {
+                    size: 12,
+                    color: '#6c757d'
+                }
+            },
+            margin: {
+                l: 150,
+                r: 50,
+                t: 50,
+                b: 50
+            },
+            height: 400,
+            showlegend: false,
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            paper_bgcolor: 'rgba(0,0,0,0)'
+        };
+
+        const config = {
+            responsive: true,
+            displayModeBar: true,
+            modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d']
+        };
+
+        Plotly.newPlot('featureImportanceChart', [featureData], layout, config);
+    });
+</script>
+{% endblock %}

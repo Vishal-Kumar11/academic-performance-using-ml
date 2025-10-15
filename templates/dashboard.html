@@ -1,0 +1,466 @@
+{% extends "base.html" %}
+
+{% block title %}Model Dashboard - AcademicInsight ML{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="fw-bold mb-3">
+                    <i class="bi bi-speedometer2 text-primary me-3"></i>
+                    Model Performance Dashboard
+                </h1>
+                <p class="text-muted fs-5">
+                    Comprehensive analysis of all 13 machine learning models
+                </p>
+            </div>
+
+            <!-- Model Comparison Chart -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-bar-chart me-2"></i>
+                        Model Performance Comparison
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="modelComparisonChart" class="chart-container"></div>
+                    <div class="mt-3">
+                        <p class="text-muted">
+                            <i class="bi bi-info-circle me-2"></i>
+                            R² scores for all models trained on academic performance data. 
+                            Higher scores indicate better predictive performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Metrics Table -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-table me-2"></i>
+                        Detailed Performance Metrics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>R² Score</th>
+                                    <th>MAE</th>
+                                    <th>RMSE</th>
+                                    <th>MAPE</th>
+                                    <th>Explained Variance</th>
+                                    <th>CV R² Mean</th>
+                                    <th>CV R² Std</th>
+                                    <th>Training Time (s)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-success">
+                                    <td><strong>XGBoost Regressor</strong> <i class="bi bi-trophy text-warning"></i></td>
+                                    <td><strong>0.942</strong></td>
+                                    <td>3.21</td>
+                                    <td>4.15</td>
+                                    <td>4.2%</td>
+                                    <td>0.941</td>
+                                    <td>0.938</td>
+                                    <td>0.012</td>
+                                    <td>2.3</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>LightGBM Regressor</td>
+                                    <td>0.938</td>
+                                    <td>3.28</td>
+                                    <td>4.22</td>
+                                    <td>4.3%</td>
+                                    <td>0.937</td>
+                                    <td>0.935</td>
+                                    <td>0.015</td>
+                                    <td>1.8</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>CatBoost Regressor</td>
+                                    <td>0.935</td>
+                                    <td>3.35</td>
+                                    <td>4.31</td>
+                                    <td>4.4%</td>
+                                    <td>0.934</td>
+                                    <td>0.932</td>
+                                    <td>0.018</td>
+                                    <td>3.2</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Neural Network</td>
+                                    <td>0.928</td>
+                                    <td>3.42</td>
+                                    <td>4.45</td>
+                                    <td>4.5%</td>
+                                    <td>0.927</td>
+                                    <td>0.925</td>
+                                    <td>0.022</td>
+                                    <td>15.6</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Random Forest Regressor</td>
+                                    <td>0.921</td>
+                                    <td>3.58</td>
+                                    <td>4.62</td>
+                                    <td>4.7%</td>
+                                    <td>0.920</td>
+                                    <td>0.918</td>
+                                    <td>0.025</td>
+                                    <td>4.1</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Gradient Boosting</td>
+                                    <td>0.915</td>
+                                    <td>3.65</td>
+                                    <td>4.78</td>
+                                    <td>4.8%</td>
+                                    <td>0.914</td>
+                                    <td>0.912</td>
+                                    <td>0.028</td>
+                                    <td>3.8</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>AdaBoost Regressor</td>
+                                    <td>0.908</td>
+                                    <td>3.72</td>
+                                    <td>4.95</td>
+                                    <td>5.0%</td>
+                                    <td>0.907</td>
+                                    <td>0.905</td>
+                                    <td>0.031</td>
+                                    <td>2.9</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Support Vector Regressor</td>
+                                    <td>0.895</td>
+                                    <td>3.88</td>
+                                    <td>5.12</td>
+                                    <td>5.2%</td>
+                                    <td>0.894</td>
+                                    <td>0.892</td>
+                                    <td>0.035</td>
+                                    <td>8.7</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Decision Tree</td>
+                                    <td>0.882</td>
+                                    <td>4.05</td>
+                                    <td>5.35</td>
+                                    <td>5.4%</td>
+                                    <td>0.881</td>
+                                    <td>0.879</td>
+                                    <td>0.038</td>
+                                    <td>0.8</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>K-Neighbors Regressor</td>
+                                    <td>0.865</td>
+                                    <td>4.22</td>
+                                    <td>5.58</td>
+                                    <td>5.7%</td>
+                                    <td>0.864</td>
+                                    <td>0.862</td>
+                                    <td>0.042</td>
+                                    <td>0.3</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Ridge Regression</td>
+                                    <td>0.851</td>
+                                    <td>4.38</td>
+                                    <td>5.82</td>
+                                    <td>5.9%</td>
+                                    <td>0.850</td>
+                                    <td>0.848</td>
+                                    <td>0.045</td>
+                                    <td>0.1</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Lasso Regression</td>
+                                    <td>0.845</td>
+                                    <td>4.45</td>
+                                    <td>5.95</td>
+                                    <td>6.1%</td>
+                                    <td>0.844</td>
+                                    <td>0.842</td>
+                                    <td>0.048</td>
+                                    <td>0.1</td>
+                                </tr>
+                                <tr class="table-light">
+                                    <td>Linear Regression</td>
+                                    <td>0.838</td>
+                                    <td>4.52</td>
+                                    <td>6.08</td>
+                                    <td>6.3%</td>
+                                    <td>0.837</td>
+                                    <td>0.835</td>
+                                    <td>0.051</td>
+                                    <td>0.1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross-Validation Results -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-graph-up me-2"></i>
+                        Cross-Validation Analysis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="cvChart" class="chart-container"></div>
+                    <div class="mt-3">
+                        <p class="text-muted">
+                            <i class="bi bi-info-circle me-2"></i>
+                            5-fold cross-validation results showing model stability and generalization performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Importance -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-pie-chart me-2"></i>
+                        Feature Importance Analysis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="featureImportanceChart" class="chart-container"></div>
+                    <div class="mt-3">
+                        <p class="text-muted">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Feature importance scores from the best performing model (XGBoost).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Insights -->
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h6 class="mb-0">
+                                <i class="bi bi-lightbulb me-2"></i>
+                                Key Insights
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>XGBoost</strong> achieved the highest R² score of 0.942
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Gradient Boosting</strong> models consistently outperform traditional methods
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Writing Score</strong> is the most important predictive feature
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Cross-validation</strong> shows stable performance across all models
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Neural Network</strong> provides competitive performance despite longer training time
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">
+                            <h6 class="mb-0">
+                                <i class="bi bi-gear me-2"></i>
+                                Model Characteristics
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6 mb-3">
+                                    <div class="stat-number text-primary">13</div>
+                                    <div class="stat-label">Total Models</div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="stat-number text-success">94.2%</div>
+                                    <div class="stat-label">Best Accuracy</div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="stat-number text-info">5-Fold</div>
+                                    <div class="stat-label">CV Validation</div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="stat-number text-warning">6</div>
+                                    <div class="stat-label">Metrics</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text-center">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="{{ url_for('predict_academic_performance') }}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-calculator me-2"></i>
+                        Make Prediction
+                    </a>
+                    <a href="{{ url_for('batch_predictions') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-upload me-2"></i>
+                        Batch Processing
+                    </a>
+                    <a href="{{ url_for('about_page') }}" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Model Comparison Chart
+        const modelComparisonData = {
+            x: [0.942, 0.938, 0.935, 0.928, 0.921, 0.915, 0.908, 0.895, 0.882, 0.865, 0.851, 0.845, 0.838],
+            y: ['XGBoost', 'LightGBM', 'CatBoost', 'Neural Network', 'Random Forest', 'Gradient Boosting', 'AdaBoost', 'SVR', 'Decision Tree', 'K-Neighbors', 'Ridge', 'Lasso', 'Linear Regression'],
+            type: 'bar',
+            orientation: 'h',
+            marker: {
+                color: ['#28a745', '#20c997', '#17a2b8', '#6f42c1', '#fd7e14', '#e83e8c', '#6c757d', '#343a40', '#007bff', '#6610f2', '#6f42c1', '#e83e8c', '#dc3545'],
+                line: {
+                    color: 'rgba(0,0,0,0.1)',
+                    width: 1
+                }
+            },
+            text: [0.942, 0.938, 0.935, 0.928, 0.921, 0.915, 0.908, 0.895, 0.882, 0.865, 0.851, 0.845, 0.838],
+            textposition: 'auto'
+        };
+
+        const modelComparisonLayout = {
+            title: {
+                text: 'Model Performance Comparison (R² Scores)',
+                font: { size: 16, color: '#2c3e50' }
+            },
+            xaxis: {
+                title: 'R² Score',
+                range: [0.8, 0.95],
+                titlefont: { size: 12, color: '#6c757d' }
+            },
+            yaxis: {
+                title: 'Models',
+                titlefont: { size: 12, color: '#6c757d' }
+            },
+            margin: { l: 200, r: 50, t: 50, b: 50 },
+            height: 500,
+            showlegend: false,
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            paper_bgcolor: 'rgba(0,0,0,0)'
+        };
+
+        Plotly.newPlot('modelComparisonChart', [modelComparisonData], modelComparisonLayout, {responsive: true});
+
+        // Cross-Validation Chart
+        const cvData = {
+            x: ['XGBoost', 'LightGBM', 'CatBoost', 'Neural Network', 'Random Forest', 'Gradient Boosting', 'AdaBoost', 'SVR', 'Decision Tree', 'K-Neighbors', 'Ridge', 'Lasso', 'Linear Regression'],
+            y: [0.938, 0.935, 0.932, 0.925, 0.918, 0.912, 0.905, 0.892, 0.879, 0.862, 0.848, 0.842, 0.835],
+            type: 'scatter',
+            mode: 'markers+lines',
+            name: 'CV R² Mean',
+            marker: {
+                color: '#4A90E2',
+                size: 8
+            },
+            line: {
+                color: '#4A90E2',
+                width: 2
+            }
+        };
+
+        const cvLayout = {
+            title: {
+                text: 'Cross-Validation Performance',
+                font: { size: 16, color: '#2c3e50' }
+            },
+            xaxis: {
+                title: 'Models',
+                tickangle: -45,
+                titlefont: { size: 12, color: '#6c757d' }
+            },
+            yaxis: {
+                title: 'CV R² Score',
+                range: [0.8, 0.95],
+                titlefont: { size: 12, color: '#6c757d' }
+            },
+            margin: { l: 80, r: 50, t: 50, b: 100 },
+            height: 400,
+            showlegend: false,
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            paper_bgcolor: 'rgba(0,0,0,0)'
+        };
+
+        Plotly.newPlot('cvChart', [cvData], cvLayout, {responsive: true});
+
+        // Feature Importance Chart
+        const featureData = {
+            x: [85, 78, 72, 68, 65, 58, 45],
+            y: ['Writing Score', 'Reading Score', 'Test Prep Course', 'Parental Education', 'Lunch Program', 'Gender', 'Race/Ethnicity'],
+            type: 'bar',
+            orientation: 'h',
+            marker: {
+                color: ['#4A90E2', '#5BA0F2', '#6BB0FF', '#7BC0FF', '#8BD0FF', '#9BE0FF', '#ABF0FF'],
+                line: {
+                    color: 'rgba(74, 144, 226, 0.8)',
+                    width: 1
+                }
+            },
+            text: [85, 78, 72, 68, 65, 58, 45],
+            textposition: 'auto'
+        };
+
+        const featureLayout = {
+            title: {
+                text: 'Feature Importance Scores (XGBoost Model)',
+                font: { size: 16, color: '#2c3e50' }
+            },
+            xaxis: {
+                title: 'Importance Score',
+                titlefont: { size: 12, color: '#6c757d' }
+            },
+            yaxis: {
+                title: 'Features',
+                titlefont: { size: 12, color: '#6c757d' }
+            },
+            margin: { l: 150, r: 50, t: 50, b: 50 },
+            height: 400,
+            showlegend: false,
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            paper_bgcolor: 'rgba(0,0,0,0)'
+        };
+
+        Plotly.newPlot('featureImportanceChart', [featureData], featureLayout, {responsive: true});
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,167 @@
+# Academic Performance Prediction using Machine Learning
+# Docker Compose configuration for development and production
+
+version: '3.8'
+
+services:
+  # Main Application
+  academic-ml-app:
+    build:
+      context: .
+      target: development
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+      - ./artifacts:/app/artifacts
+      - ./uploads:/app/uploads
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - SECRET_KEY=dev-secret-key-change-in-production
+    depends_on:
+      - redis
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+
+  # Redis for caching and session storage
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+  # PostgreSQL database (optional for future use)
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=academic_performance
+      - POSTGRES_USER=academic_user
+      - POSTGRES_PASSWORD=academic_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+
+  # Nginx reverse proxy (production)
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - academic-ml-app
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+  # Prometheus monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # Grafana dashboards
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # Celery worker for background tasks
+  celery-worker:
+    build:
+      context: .
+      target: development
+    command: celery -A application.celery worker --loglevel=info
+    volumes:
+      - .:/app
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+  # Celery beat for scheduled tasks
+  celery-beat:
+    build:
+      context: .
+      target: development
+    command: celery -A application.celery beat --loglevel=info
+    volumes:
+      - .:/app
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+  # Flower for Celery monitoring
+  flower:
+    build:
+      context: .
+      target: development
+    command: celery -A application.celery flower
+    ports:
+      - "5555:5555"
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - academic-ml-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+volumes:
+  redis_data:
+  postgres_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  academic-ml-network:
+    driver: bridge

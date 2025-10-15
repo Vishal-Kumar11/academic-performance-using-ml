@@ -1,0 +1,460 @@
+{% extends "base.html" %}
+
+{% block title %}About - Academic Performance Prediction using Machine Learning{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="fw-bold mb-3">
+                    <i class="bi bi-info-circle text-primary me-3"></i>
+                    About AcademicInsight ML
+                </h1>
+                <p class="text-muted fs-5">
+                    Advanced machine learning system for academic performance prediction
+                </p>
+            </div>
+
+            <!-- Project Overview -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-lightbulb me-2"></i>
+                        Project Overview
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="fs-5 mb-4">
+                                AcademicInsight ML is a comprehensive machine learning system designed to predict 
+                                student academic performance using advanced algorithms and data analysis techniques. 
+                                Our system leverages 13 different machine learning models to provide accurate 
+                                predictions with detailed explanations.
+                            </p>
+                            <p class="mb-4">
+                                Built with modern web technologies and state-of-the-art ML frameworks, this system 
+                                demonstrates the power of data science in educational contexts. The project showcases 
+                                professional-grade software engineering practices, comprehensive model evaluation, 
+                                and user-friendly interfaces.
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="stat-card">
+                                <div class="stat-number text-primary">13</div>
+                                <div class="stat-label">ML Models</div>
+                                <div class="stat-description">Comprehensive comparison</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-cpu me-2"></i>
+                        Technology Stack
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="tech-card text-center">
+                                <i class="bi bi-graph-up text-primary mb-3" style="font-size: 3rem;"></i>
+                                <h6 class="fw-bold">Machine Learning</h6>
+                                <ul class="list-unstyled text-muted">
+                                    <li>TensorFlow/Keras</li>
+                                    <li>XGBoost</li>
+                                    <li>LightGBM</li>
+                                    <li>CatBoost</li>
+                                    <li>Scikit-learn</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="tech-card text-center">
+                                <i class="bi bi-code-slash text-success mb-3" style="font-size: 3rem;"></i>
+                                <h6 class="fw-bold">Backend</h6>
+                                <ul class="list-unstyled text-muted">
+                                    <li>Python 3.8+</li>
+                                    <li>Flask</li>
+                                    <li>Pandas</li>
+                                    <li>NumPy</li>
+                                    <li>Joblib</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="tech-card text-center">
+                                <i class="bi bi-palette text-warning mb-3" style="font-size: 3rem;"></i>
+                                <h6 class="fw-bold">Frontend</h6>
+                                <ul class="list-unstyled text-muted">
+                                    <li>Bootstrap 5</li>
+                                    <li>HTML5/CSS3</li>
+                                    <li>JavaScript</li>
+                                    <li>Plotly.js</li>
+                                    <li>Bootstrap Icons</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="tech-card text-center">
+                                <i class="bi bi-shield-check text-danger mb-3" style="font-size: 3rem;"></i>
+                                <h6 class="fw-bold">ML Tools</h6>
+                                <ul class="list-unstyled text-muted">
+                                    <li>SHAP</li>
+                                    <li>Cross-validation</li>
+                                    <li>Hyperparameter Tuning</li>
+                                    <li>Feature Engineering</li>
+                                    <li>Model Evaluation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Information -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-diagram-3 me-2"></i>
+                        Machine Learning Models
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-primary mb-3">Gradient Boosting Models</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>XGBoost</strong> - Best performing model (R² = 0.942)
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>LightGBM</strong> - Fast training with high accuracy
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>CatBoost</strong> - Handles categorical features well
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Gradient Boosting</strong> - Traditional boosting approach
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>AdaBoost</strong> - Adaptive boosting algorithm
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-info mb-3">Other Models</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-info me-2"></i>
+                                    <strong>Neural Network</strong> - Deep learning approach
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-info me-2"></i>
+                                    <strong>Random Forest</strong> - Ensemble of decision trees
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-info me-2"></i>
+                                    <strong>Support Vector Regressor</strong> - Kernel methods
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-info me-2"></i>
+                                    <strong>Linear Models</strong> - Ridge, Lasso, Linear Regression
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle text-info me-2"></i>
+                                    <strong>K-Neighbors</strong> - Instance-based learning
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-star me-2"></i>
+                        Key Features
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="bi bi-calculator text-primary mb-3" style="font-size: 2.5rem;"></i>
+                                <h6 class="fw-bold">Single Predictions</h6>
+                                <p class="text-muted">
+                                    Get instant predictions for individual students with detailed confidence scores 
+                                    and feature explanations using SHAP values.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="bi bi-upload text-success mb-3" style="font-size: 2.5rem;"></i>
+                                <h6 class="fw-bold">Batch Processing</h6>
+                                <p class="text-muted">
+                                    Process hundreds of students at once with CSV upload functionality. 
+                                    Download comprehensive results with analysis.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="bi bi-graph-up text-info mb-3" style="font-size: 2.5rem;"></i>
+                                <h6 class="fw-bold">Model Dashboard</h6>
+                                <p class="text-muted">
+                                    Compare all 13 models with interactive charts, performance metrics, 
+                                    and cross-validation results.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="bi bi-eye text-warning mb-3" style="font-size: 2.5rem;"></i>
+                                <h6 class="fw-bold">SHAP Explanations</h6>
+                                <p class="text-muted">
+                                    Understand model decisions with SHAP values, feature importance 
+                                    analysis, and prediction explanations.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="bi bi-shield-check text-danger mb-3" style="font-size: 2.5rem;"></i>
+                                <h6 class="fw-bold">Cross-Validation</h6>
+                                <p class="text-muted">
+                                    5-fold cross-validation ensures robust performance estimation 
+                                    and prevents overfitting.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="bi bi-graph-down text-secondary mb-3" style="font-size: 2.5rem;"></i>
+                                <h6 class="fw-bold">Comprehensive Metrics</h6>
+                                <p class="text-muted">
+                                    Evaluate models using R², MAE, RMSE, MAPE, and explained variance 
+                                    for thorough analysis.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Metrics -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-speedometer2 me-2"></i>
+                        Performance Metrics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-card">
+                                <div class="stat-number text-primary">94.2%</div>
+                                <div class="stat-label">Best R² Score</div>
+                                <div class="stat-description">XGBoost Model</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-card">
+                                <div class="stat-number text-success">3.21</div>
+                                <div class="stat-label">MAE</div>
+                                <div class="stat-description">Mean Absolute Error</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-card">
+                                <div class="stat-number text-info">4.15</div>
+                                <div class="stat-label">RMSE</div>
+                                <div class="stat-description">Root Mean Square Error</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-card">
+                                <div class="stat-number text-warning">5-Fold</div>
+                                <div class="stat-label">CV</div>
+                                <div class="stat-description">Cross Validation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dataset Information -->
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-database me-2"></i>
+                        Dataset Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Features Used</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-person text-primary me-2"></i>
+                                    <strong>Gender</strong> - Student's gender
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-people text-success me-2"></i>
+                                    <strong>Race/Ethnicity</strong> - Ethnic group classification
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-mortarboard text-info me-2"></i>
+                                    <strong>Parental Education</strong> - Parent's education level
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-cup-hot text-warning me-2"></i>
+                                    <strong>Lunch Program</strong> - Free/reduced or standard lunch
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-book text-danger me-2"></i>
+                                    <strong>Test Prep Course</strong> - Completion status
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-book-half text-secondary me-2"></i>
+                                    <strong>Reading Score</strong> - Reading test performance
+                                </li>
+                                <li>
+                                    <i class="bi bi-pencil-square text-dark me-2"></i>
+                                    <strong>Writing Score</strong> - Writing test performance
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Target Variable</h6>
+                            <div class="alert alert-info">
+                                <h6 class="alert-heading">
+                                    <i class="bi bi-target me-2"></i>
+                                    Math Score Prediction
+                                </h6>
+                                <p class="mb-0">
+                                    The system predicts student performance in mathematics (0-100 scale) 
+                                    based on demographic information and previous test scores in reading and writing.
+                                </p>
+                            </div>
+                            
+                            <h6 class="fw-bold mb-3">Data Quality</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    Complete dataset with no missing values
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    Balanced representation across demographics
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    Validated score ranges (0-100)
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    Consistent categorical encoding
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-envelope me-2"></i>
+                        Contact & Links
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Project Information</h6>
+                            <p class="text-muted mb-3">
+                                This project demonstrates advanced machine learning techniques applied to 
+                                educational data analysis. Built as a portfolio project showcasing 
+                                professional software development practices.
+                            </p>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="bi bi-github me-2"></i>GitHub
+                                </a>
+                                <a href="#" class="btn btn-outline-info">
+                                    <i class="bi bi-linkedin me-2"></i>LinkedIn
+                                </a>
+                                <a href="#" class="btn btn-outline-success">
+                                    <i class="bi bi-envelope me-2"></i>Contact
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Technical Details</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-code-slash text-primary me-2"></i>
+                                    <strong>Language:</strong> Python 3.8+
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-gear text-success me-2"></i>
+                                    <strong>Framework:</strong> Flask Web Framework
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-palette text-info me-2"></i>
+                                    <strong>Frontend:</strong> Bootstrap 5 + Custom CSS
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-graph-up text-warning me-2"></i>
+                                    <strong>ML Libraries:</strong> TensorFlow, XGBoost, Scikit-learn
+                                </li>
+                                <li>
+                                    <i class="bi bi-shield-check text-danger me-2"></i>
+                                    <strong>Validation:</strong> 5-fold Cross-validation
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Add any page-specific JavaScript here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animate tech cards on scroll
+        const techCards = document.querySelectorAll('.tech-card, .feature-item');
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        techCards.forEach(card => observer.observe(card));
+    });
+</script>
+{% endblock %}
